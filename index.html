@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CS Learning Hub</title>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; background: #fffafa; margin: 0; color: #450a0a; display: flex; flex-direction: column; min-height: 100vh; }
+        header { background: linear-gradient(135deg, #7f1d1d, #dc2626); color: white; text-align: center; padding: 4rem 1rem; }
+        main { max-width: 1000px; margin: auto; padding: 3rem 1.5rem; flex: 1; width: 100%; box-sizing: border-box; }
+        
+        /* Forced 3-column horizontal layout */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 1.5rem; 
+        }
+        
+        .btn { 
+            display: block;
+            text-decoration: none;
+            color: #dc2626; 
+            background: white; 
+            border: 2px solid #dc2626; 
+            border-radius: 12px; 
+            padding: 2rem 1.5rem; 
+            text-align: center; 
+            transition: 0.2s ease; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); 
+        }
+        
+        .btn:hover { 
+            background: #dc2626; 
+            color: white; 
+            transform: translateY(-5px); 
+        }
+
+        .btn h3 { margin: 0 0 0.5rem 0; font-size: 1.5rem; }
+        .btn p { margin: 0; opacity: 0.9; }
+
+        footer {
+            /* Updated background to match the header gradient */
+            background: linear-gradient(135deg, #7f1d1d, #dc2626);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+
+        footer p { margin: 0.5rem 0; font-size: 0.9rem; opacity: 0.9; }
+        .group-name { font-weight: bold; color: #fecaca; display: block; margin-bottom: 0.5rem; }
+
+        /* Mobile adjustment to prevent buttons from getting too squashed */
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>CS Learning Hub</h1>
+        <p>Select a module below to start your study session.</p>
+    </header>
+
+    <main>
+        <div class="grid">
+            <a href="network.html" class="btn">
+                <h3>Network Topology</h3>
+                <p>Network nodes & layout</p>
+            </a>
+
+            <a href="cpu.html" class="btn">
+                <h3>CPU Architecture</h3>
+                <p>Internal processor logic</p>
+            </a>
+
+            <a href="device.html" class="btn">
+                <h3>Devices Management</h3>
+                <p>Hardware communication</p>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <span class="group-name">Done by S2 AIML Group Members:</span>
+        <p>Saikrishna P • Alwin Francis • Renuka K V • Neha Nazeer</p>
+    </footer>
+
+</body>
+</html> 
