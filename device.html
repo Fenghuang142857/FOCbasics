@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Management Guide</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            background: #fffdfa;
+            margin: 0;
+            color: #451a03;
+        }
+
+        header {
+            background: linear-gradient(135deg, #92400e, #f59e0b);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: auto;
+            padding: 2rem;
+        }
+
+        section { margin-bottom: 3rem; }
+
+        h2 {
+            border-left: 4px solid #f59e0b;
+            padding-left: 10px;
+            color: #92400e;
+        }
+
+        .image {
+            background: white;
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(146, 64, 14, 0.1);
+            text-align: center;
+            margin: 1rem 0;
+            border: 1px solid #fef3c7;
+        }
+
+        .image img { max-width: 100%; border-radius: 8px; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .note {
+            background: white;
+            padding: 1.25rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(146, 64, 14, 0.05);
+            border-top: 4px solid #f59e0b;
+        }
+
+        .note h3 { margin: 0 0 0.5rem; color: #b45309; }
+
+        .table-wrap {
+            overflow-x: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(146, 64, 14, 0.05);
+            margin-top: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td { padding: 1rem; border-bottom: 1px solid #fef3c7; }
+        
+        th { 
+            background: #f59e0b; 
+            color: white; 
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #fffbeb;
+        }
+.back-link {
+           display: inline-block;
+        text-decoration: none;
+        color: #92400e;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        padding: 0.5rem 1rem;
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #f59e0b;
+        transition: 0.2;
+        }
+
+    .back-link:hover {
+        background: #f59e0b;
+        color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Device Management</h1>
+        <p>Managing communication between the Operating System and hardware peripherals.</p>
+    </header>
+
+    <main>
+    <a href="index.html" class="back-link">← Back to Hub</a>
+        <section>
+            <h2>What is Device Management?</h2>
+            <p>It is the process by which the <strong>Operating System</strong> manages hardware devices such as keyboards, printers, and disks. It ensures efficient data transfer, handles hardware interrupts, and provides a uniform interface for the software to interact with diverse hardware.</p>
+            
+            <div class="image">
+                <img src="pic.png" alt="Device Management Diagram" >
+                <p style="font-size: 0.8rem; color: #92400e; opacity: 0.8;">Figure 1: The layer-based communication between CPU, OS, and Peripherals.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Core Components</h2>
+            <div class="grid">
+                <div class="note">
+                    <h3>Device Drivers</h3>
+                    <p>Specialized software programs that allow the OS to communicate with specific hardware. They act as a translator between hardware signals and software commands.</p>
+                </div>
+                <div class="note">
+                    <h3>I/O Controllers</h3>
+                    <p>Hardware components that manage the actual electrical signals and data movement for specific devices (like a SATA controller for hard drives).</p>
+                </div>
+                <div class="note">
+                    <h3>Interrupt Handler</h3>
+                    <p>A routine that the OS executes when a device sends a signal (interrupt) indicating it has finished a task or needs attention.</p>
+                </div>
+                <div class="note">
+                    <h3>I/O Buffering</h3>
+                    <p>Temporary storage areas used to hold data while it is being transferred between two devices or between a device and an application.</p>
+                </div>
+                <div class="note">
+                    <h3>Spooling</h3>
+                    <p>Simultaneous Peripheral Operations On-Line: placing data in a temporary working area (queue) for another program to process (like a print queue).</p>
+                </div>
+                <div class="note">
+                    <h3>Bus Interface</h3>
+                    <p>The physical and logical connection that allows the device controller to talk to the CPU and Main Memory (e.g., PCIe, USB).</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>I/O Transfer Techniques</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Description</th>
+                            <th>Efficiency</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Programmed I/O</strong></td>
+                            <td>The CPU waits and checks the device status repeatedly (Polling).</td>
+                            <td>Low; wastes CPU cycles waiting for hardware.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Interrupt-Driven</strong></td>
+                            <td>The device notifies the CPU when it is ready by sending a signal.</td>
+                            <td>Medium; better than polling but still involves CPU for data move.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DMA (Direct Memory Access)</strong></td>
+                            <td>A specialized controller moves data directly between device and RAM.</td>
+                            <td>High; the CPU is free to do other tasks during transfer.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Double Buffering</strong></td>
+                            <td>Using two buffers so one can be emptied while the other is filled.</td>
+                            <td>High; reduces idle time between data transfers.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Character vs Block</strong></td>
+                            <td>Transferring 1 byte at a time (Keyboard) vs large chunks (Disk).</td>
+                            <td>Varies; depends on the speed of the peripheral.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

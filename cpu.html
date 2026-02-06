@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CPU Architecture Guide</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            background: #f1f5f9;
+            margin: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: auto;
+            padding: 2rem;
+        }
+
+        section { margin-bottom: 3rem; }
+
+        h2 {
+            border-left: 4px solid #3b82f6;
+            padding-left: 10px;
+            color: #1e3a8a;
+        }
+
+        .image {
+            background: white;
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px #0002;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .image img { max-width: 100%; border-radius: 8px; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .note {
+            background: white;
+            padding: 1.25rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px #0001;
+            border-top: 4px solid #3b82f6;
+        }
+
+        .note h3 { margin: 0 0 0.5rem; color: #3b82f6; }
+
+        .table-wrap {
+            overflow-x: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px #0001;
+            margin-top: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td { padding: 1rem; border-bottom: 1px solid #e2e8f0; }
+        
+        th { 
+            background: #3b82f6; 
+            color: white; 
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+.back-link {
+           display: inline-block;
+        text-decoration: none;
+        color: #3b82f6;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        padding: 0.5rem 1rem;
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #1e3a8a;
+        transition: 0.2;
+        }
+
+    .back-link:hover {
+        background: #1e3a8a;
+        color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>CPU Architecture</h1>
+        <p>The internal design and organization of the Central Processing Unit.</p>
+    </header>
+
+    <main>
+    <a href="index.html" class="back-link">← Back to Hub</a>
+        <section>
+            <h2>What is CPU Architecture?</h2>
+            <p>It is the <strong>internal logic design</strong> that determines how a processor executes instructions, manages data flow, and interacts with memory. The most common model is the Von Neumann architecture.</p>
+            
+            <div class="image">
+                <img src="pic.png" alt="CPU Diagram" >
+                <p style="font-size: 0.8rem; color: #64748b;">Figure 1: Simplified internal structure of a processor.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Core Components</h2>
+            <div class="grid">
+                <div class="note">
+                    <h3>ALU</h3>
+                    <p>The Arithmetic Logic Unit performs all mathematical calculations (addition, subtraction) and logical operations (AND, OR, NOT).</p>
+                </div>
+                <div class="note">
+                    <h3>Control Unit (CU)</h3>
+                    <p>The "brain" of the CPU that decodes instructions from memory and coordinates the timing and movement of data between components.</p>
+                </div>
+                <div class="note">
+                    <h3>Registers</h3>
+                    <p>High-speed, internal storage locations used to hold small amounts of data or instructions currently being processed.</p>
+                </div>
+                <div class="note">
+                    <h3>Buses</h3>
+                    <p>Communication pathways (Address, Data, and Control) that transfer signals between the CPU, memory, and I/O devices.</p>
+                </div>
+                <div class="note">
+                    <h3>Cache Memory</h3>
+                    <p>Small, extremely fast memory located on the CPU chip to store frequently used data and speed up the fetch-execute cycle.</p>
+                </div>
+                <div class="note">
+                    <h3>Clock</h3>
+                    <p>An electronic oscillator that generates pulses at a steady rate to synchronize all internal operations of the processor.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Architecture Comparison</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Concept</th>
+                            <th>Description</th>
+                            <th>Importance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Fetch Cycle</strong></td>
+                            <td>Retrieving an instruction from main memory (RAM)</td>
+                            <td>First step in running any program</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Decode Cycle</strong></td>
+                            <td>Translating the instruction into signals for the CPU</td>
+                            <td>Ensures the ALU knows what to calculate</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Execute Cycle</strong></td>
+                            <td>Carrying out the actual instruction or calculation</td>
+                            <td>Produces the final output or data move</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Von Neumann</strong></td>
+                            <td>Shared memory for code and data</td>
+                            <td>Simple design used in most PCs</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Harvard</strong></td>
+                            <td>Separate memory for code and data</td>
+                            <td>Faster; common in microcontrollers</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RISC vs CISC</strong></td>
+                            <td>Simple instructions vs complex instruction sets</td>
+                            <td>Impacts power use and processing speed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

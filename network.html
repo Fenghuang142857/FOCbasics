@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Network Topology Guide</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            background: #f1f5f9;
+            margin: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, #064e3b, #059669);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: auto;
+            padding: 2rem;
+        }
+
+        section { margin-bottom: 3rem; }
+
+        h2 {
+            border-left: 4px solid #059669;
+            padding-left: 10px;
+            color: #064e3b;
+        }
+
+        .image {
+            background: white;
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px #0002;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .image img { max-width: 100%; border-radius: 8px; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .note {
+            background: white;
+            padding: 1.25rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px #0001;
+            border-top: 4px solid #059669;
+        }
+
+        .note h3 { margin: 0 0 0.5rem; color: #059669; }
+
+        .table-wrap {
+            overflow-x: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px #0001;
+            margin-top: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td { padding: 1rem; border-bottom: 1px solid #e2e8f0; }
+        
+        th { 
+            background: #059669; 
+            color: white; 
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+        .back-link {
+           display: inline-block;
+        text-decoration: none;
+        color: #064e3b;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        padding: 0.5rem 1rem;
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #059669;
+        transition: 0.2;
+        }
+
+    .back-link:hover {
+        background: #059669;
+        color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Network Topology</h1>
+        <p>The physical and logical architecture of computer connections.</p>
+    </header>
+
+    <main>
+    <a href="index.html" class="back-link">← Back to Hub</a>
+        <section>
+            <h2>What is Network Topology?</h2>
+            <p>It is the <strong>geometric arrangement</strong> of nodes and links in a network, determining data flow, ease of installation, and fault tolerance.</p>
+            
+            <div class="image">
+                <img src="pic.png" alt="Topology Picture">
+                <p style="font-size: 0.8rem; color: #64748b;">Figure 1: Visual comparison of network configurations.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Common Types</h2>
+            <div class="grid">
+                <!-- Original Three -->
+                <div class="note">
+                    <h3>Bus</h3>
+                    <p>Uses a single central cable (backbone) to which all devices connect. Simple to set up but fails entirely if the main cable breaks.</p>
+                </div>
+                <div class="note">
+                    <h3>Star</h3>
+                    <p>All nodes connect to a central hub or switch. This is the most popular modern setup as one cable failure won't crash the whole network.</p>
+                </div>
+                <div class="note">
+                    <h3>Ring</h3>
+                    <p>Each device has two neighbors for communication. Data travels in one direction, often managed by a "token" to prevent collisions.</p>
+                </div>
+
+                <!-- New Three -->
+                <div class="note">
+                    <h3>Tree</h3>
+                    <p>A hierarchical structure where star networks are connected to a main bus cable. It is highly scalable and used in large corporate networks.</p>
+                </div>
+                <div class="note">
+                    <h3>Mesh</h3>
+                    <p>Every node is connected to several others (partial) or all others (full). It provides the highest redundancy and reliability available.</p>
+                </div>
+                <div class="note">
+                    <h3>Hybrid</h3>
+                    <p>A combination of two or more different topologies (e.g., Star and Bus). It allows for maximum flexibility based on specific needs.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Comparison</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Topology</th>
+                            <th>Pros</th>
+                            <th>Cons</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Bus</strong></td>
+                            <td>Cheap, easy to install</td>
+                            <td>Backbone is a single point of failure</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Star</strong></td>
+                            <td>Robust, easy to troubleshoot</td>
+                            <td>Central hub is a failure point</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ring</strong></td>
+                            <td>Ordered data flow</td>
+                            <td>One node failure breaks the entire ring</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tree</strong></td>
+                            <td>Easy to expand and manage</td>
+                            <td>Heavily dependent on the main trunk</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mesh</strong></td>
+                            <td>Fault tolerant, highly reliable</td>
+                            <td>Very expensive and complex to wire</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hybrid</strong></td>
+                            <td>Highly flexible and scalable</td>
+                            <td>Complex design and high maintenance</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
