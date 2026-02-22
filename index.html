@@ -1,91 +1,287 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CS Learning Hub</title>
+    <title>CS Learning Hub | S2 AIML</title>
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; background: #fffafa; margin: 0; color: #450a0a; display: flex; flex-direction: column; min-height: 100vh; }
-        header { background: linear-gradient(135deg, #7f1d1d, #dc2626); color: white; text-align: center; padding: 4rem 1rem; }
-        main { max-width: 1000px; margin: auto; padding: 3rem 1.5rem; flex: 1; width: 100%; box-sizing: border-box; }
-        
-        /* Forced 3-column horizontal layout */
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 1.5rem; 
-        }
-        
-        .btn { 
-            display: block;
-            text-decoration: none;
-            color: #dc2626; 
-            background: white; 
-            border: 2px solid #dc2626; 
-            border-radius: 12px; 
-            padding: 2rem 1.5rem; 
-            text-align: center; 
-            transition: 0.2s ease; 
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); 
-        }
-        
-        .btn:hover { 
-            background: #dc2626; 
-            color: white; 
-            transform: translateY(-5px); 
+        :root {
+            /* Midnight Aurora Color Palette */
+            --bg: #020617; /* Deepest Navy */
+            --surface: #0f172a; /* Slate Blue */
+            --accent: #10b981; /* Emerald Tech Green */
+            --accent-gradient: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --nav-height: 70px;
         }
 
-        .btn h3 { margin: 0 0 0.5rem 0; font-size: 1.5rem; }
-        .btn p { margin: 0; opacity: 0.9; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
 
-        footer {
-            /* Updated background to match the header gradient */
-            background: linear-gradient(135deg, #7f1d1d, #dc2626);
-            color: white;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            height: var(--nav-height);
+            background: rgba(2, 6, 23, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- HERO --- */
+        .hero {
+            height: 75vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 2rem 1rem;
-            margin-top: 3rem;
+            padding: 0 1rem;
+            background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 60%);
         }
 
-        footer p { margin: 0.5rem 0; font-size: 0.9rem; opacity: 0.9; }
-        .group-name { font-weight: bold; color: #fecaca; display: block; margin-bottom: 0.5rem; }
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.2rem, 8vw, 4.5rem);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -2px;
+        }
 
-        /* Mobile adjustment to prevent buttons from getting too squashed */
-        @media (max-width: 600px) {
-            .grid { grid-template-columns: 1fr; }
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 500px;
+        }
+
+        /* --- Z-PATTERN MODULES --- */
+        .modules-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 6rem;
+            display: flex;
+            flex-direction: column;
+            gap: 5rem;
+        }
+
+        .module-row {
+            display: flex;
+            width: 100%;
+        }
+
+        .module-row.left { justify-content: flex-start; }
+        .module-row.right { justify-content: flex-end; }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 28px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 480px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--accent);
+            background: #1e293b;
+            box-shadow: 0 20px 40px -15px rgba(16, 185, 129, 0.2);
+        }
+
+        .card i {
+            font-size: 2.5rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        .card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            background: var(--accent-gradient);
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1rem;
+            box-shadow: 0 8px 15px rgba(16, 185, 129, 0.3);
+            transform: rotate(-5deg);
+        }
+
+        /* --- SIMPLE ABOUT --- */
+        #about {
+            padding: 100px 5%;
+            text-align: center;
+            background: rgba(15, 23, 42, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        #about h2 { 
+            font-family: 'Space Grotesk'; 
+            margin-bottom: 1.5rem; 
+            font-size: 2rem;
+        }
+
+        #about p { 
+            color: var(--text-secondary); 
+            max-width: 650px; 
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #020617;
+            padding: 5rem 5% 4rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .team-chips {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .chip {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.6rem 1.4rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .chip:hover {
+            border-color: var(--accent);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .module-row.right, .module-row.left { justify-content: center; }
+            .card { max-width: 100%; padding: 2rem; }
+            .hero { height: 60vh; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>CS Learning Hub</h1>
-        <p>Select a module below to start your study session.</p>
+    <nav>
+        <div class="logo">CS HUB</div>
+        <div style="font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; color: var(--accent);">S2 AIML GROUP</div>
+    </nav>
+
+    <header class="hero">
+        <h1>Learn CS <span style="color: var(--accent);">Simply.</span></h1>
+        <p>Short, easy-to-read notes on computer basics for our S2 AIML classmates.</p>
     </header>
 
-    <main>
-        <div class="grid">
-            <a href="network.html" class="btn">
+    <main class="modules-container">
+        
+        <!-- Topic 1: Left -->
+        <div class="module-row left">
+            <a href="network.html" class="card">
+                <span class="step-number">01</span>
+                <i class="fas fa-network-wired"></i>
                 <h3>Network Topology</h3>
-                <p>Network nodes & layout</p>
-            </a>
-
-            <a href="cpu.html" class="btn">
-                <h3>CPU Architecture</h3>
-                <p>Internal processor logic</p>
-            </a>
-
-            <a href="device.html" class="btn">
-                <h3>Devices Management</h3>
-                <p>Hardware communication</p>
+                <p>How we connect computers together in a simple way—like Star, Mesh, and Ring networks.</p>
             </a>
         </div>
+
+        <!-- Topic 2: Right -->
+        <div class="module-row right">
+            <a href="device.html" class="card">
+                <span class="step-number">02</span>
+                <i class="fas fa-keyboard"></i>
+                <h3>Device Management</h3>
+                <p>Ever wonder how your computer knows what you typed? This covers how it handles hardware.</p>
+            </a>
+        </div>
+
+        <!-- Topic 3: Left -->
+        <div class="module-row left">
+            <a href="cpu.html" class="card">
+                <span class="step-number">03</span>
+                <i class="fas fa-microchip"></i>
+                <h3>CPU Architecture</h3>
+                <p>The core parts of the "brain" and how it processes your code line by line.</p>
+            </a>
+        </div>
+
     </main>
 
+    <section id="about">
+        <h2>Our Goal</h2>
+        <p>Computer Science can get complicated quickly. We built this hub to make the core concepts easy to grab before exams or during your project work.</p>
+    </section>
+
     <footer>
-        <span class="group-name">Done by S2 AIML Group Members:</span>
-        <p>Saikrishna P • Alwin Francis • Renuka K V • Neha Nazeer</p>
+        <p style="font-size: 0.8rem; letter-spacing: 2px; color: var(--accent); font-weight: 800; text-transform: uppercase;">The S2 AIML Team</p>
+        <div class="team-chips">
+            <div class="chip">Saikrishna P</div>
+            <div class="chip">Alwin Francis</div>
+            <div class="chip">Renuka K V</div>
+            <div class="chip">Neha Nazeer</div>
+        </div>
+        <p style="margin-top: 3rem; color: var(--text-secondary); font-size: 0.85rem; opacity: 0.6;">Built with passion &copy; 2024</p>
     </footer>
 
 </body>
-</html> 
+</html>
