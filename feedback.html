@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback | CS Learning Hub</title>
-    <!-- Google Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -176,6 +175,11 @@
             filter: brightness(1.1);
         }
 
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
         /* --- FOOTER --- */
         footer {
             background: #020617;
@@ -203,58 +207,6 @@
         }
     </style>
 </head>
-<!-- 1. Include the Supabase JS Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <script>
-        // 2. Initialize Supabase
-        // Replace these with your actual Project URL and Anon Key from Project Settings > API
-        const SUPABASE_URL = 'https://gkrsgblobiciqolqpnuf.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_AEkpQPab3BSiYOj8job2GA_einygs7M';
-        
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        // 3. Handle Form Submission
-        const feedbackForm = document.querySelector('form');
-        const submitBtn = document.querySelector('.submit-btn');
-
-        feedbackForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            // Change button state
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
-
-            // Get form data
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                topic: document.getElementById('topic').value,
-                message: document.getElementById('message').value
-            };
-
-            try {
-                // 4. Insert data into Supabase
-                const { data, error } = await supabase
-                    .from('feedback')
-                    .insert([formData]);
-
-                if (error) throw error;
-
-                // Success!
-                alert('Feedback sent successfully! Thank you.');
-                feedbackForm.reset();
-
-            } catch (error) {
-                console.error('Error:', error.message);
-                alert('Something went wrong. Please try again.');
-            } finally {
-                // Restore button state
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = 'Submit Feedback <i class="fas fa-paper-plane"></i>';
-            }
-        });
-    </script>
 <body>
 
     <nav>
@@ -271,7 +223,7 @@
         </div>
 
         <div class="feedback-card">
-            <form action="#">
+            <form id="feedbackForm">
                 <div class="form-group">
                     <label for="name">Your Name</label>
                     <input type="text" id="name" placeholder="Enter your name" required>
@@ -304,5 +256,58 @@
         <p style="color: var(--text-secondary); font-size: 0.85rem; opacity: 0.6;">Your feedback matters to us.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        // 1. PROJECT CONFIGURATION
+        const SUPABASE_URL = 'https://gkrsgblobiciqolqpnuf.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_AEkpQPab3BSiYOj8job2GA_einygs7M';
+
+        // Initialize with a unique variable name to avoid global conflicts
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // 2. ELEMENT SELECTORS
+        const feedbackForm = document.getElementById('feedbackForm');
+        const submitBtn = document.querySelector('.submit-btn');
+
+        // 3. SUBMIT HANDLER
+        feedbackForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Stop page refresh
+
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            const originalBtnHTML = submitBtn.innerHTML;
+            submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
+
+            // Gather Data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                topic: document.getElementById('topic').value,
+                message: document.getElementById('message').value
+            };
+
+            try {
+                // 4. SUPABASE INSERT
+                const { data, error } = await supabaseClient
+                    .from('feedback')
+                    .insert([formData]);
+
+                if (error) throw error;
+
+                // On Success
+                alert('Feedback sent successfully! Thank you.');
+                feedbackForm.reset();
+
+            } catch (error) {
+                console.error('Submission Error:', error.message);
+                alert('Oops! Something went wrong: ' + error.message);
+            } finally {
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHTML;
+            }
+        });
+    </script>
 </body>
 </html>
