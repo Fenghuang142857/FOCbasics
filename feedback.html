@@ -212,7 +212,7 @@
         const SUPABASE_URL = 'https://gkrsgblobiciqolqpnuf.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_AEkpQPab3BSiYOj8job2GA_einygs7M';
         
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // 3. Handle Form Submission
         const feedbackForm = document.querySelector('form');
